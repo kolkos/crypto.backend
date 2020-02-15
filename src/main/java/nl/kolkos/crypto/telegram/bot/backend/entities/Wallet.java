@@ -31,9 +31,15 @@ public class Wallet {
     @JoinColumn(name = "coin_id")
     private Coin coin;
 
+    @ManyToOne
+    @JoinColumn(name = "portfolio_id")
+    private Portfolio portfolio;
+
     @NotNull
     private String address;
 
     @NotNull
     private String description;
+
+
 }

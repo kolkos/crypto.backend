@@ -1,4 +1,4 @@
-package nl.kolkos.crypto.telegram.bot.backend.configurations;
+package nl.kolkos.crypto.telegram.bot.backend.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
