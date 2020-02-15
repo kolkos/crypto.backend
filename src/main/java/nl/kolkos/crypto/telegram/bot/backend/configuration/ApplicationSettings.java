@@ -11,7 +11,7 @@ public class ApplicationSettings {
     private String urlTemplateCoinValueApi;
 
     // https://www.bitstamp.net/api/v2/ticker/{{coin.symbol}}{{app.currency}}/
-    @Value("${wallet-value-api}")
+    @Value("${apis.wallet-value-api}")
     private String urlTemplateWalletValueApi;
 
     @Value("${app.currency}")

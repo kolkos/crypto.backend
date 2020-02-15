@@ -1,5 +1,6 @@
 spring:
   datasource:
+    initialization-mode: always
     url: jdbc:mysql://localhost:30306/test
     username: test
     password: test
