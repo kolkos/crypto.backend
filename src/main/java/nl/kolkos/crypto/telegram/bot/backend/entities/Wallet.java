@@ -1,5 +1,6 @@
 package nl.kolkos.crypto.telegram.bot.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,12 +36,12 @@ public class Wallet {
 
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
+    @JsonBackReference
     private Portfolio portfolio;
 
     @NotNull
     private String address;
 
-    @NotNull
     private String description;
 
 
