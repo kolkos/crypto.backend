@@ -3,6 +3,7 @@ package nl.kolkos.crypto.telegram.bot.backend.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import nl.kolkos.crypto.telegram.bot.backend.entities.Coin;
+import nl.kolkos.crypto.telegram.bot.backend.exception.CoinNotFoundException;
 import nl.kolkos.crypto.telegram.bot.backend.repository.CoinRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,11 @@ public class CoinService {
         log.info("Saving coin: {}", coin);
         return coinRepository.save(coin);
     }
+
+    public Coin findBySymbol(String symbol) {
+        return coinRepository.findBySymbol(symbol).orElseThrow(() -> new CoinNotFoundException("No coin found with the symbol '" + symbol + "'"));
+    }
+
+
 
 }

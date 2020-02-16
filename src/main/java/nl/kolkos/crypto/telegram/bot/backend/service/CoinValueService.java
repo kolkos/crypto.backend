@@ -47,6 +47,10 @@ public class CoinValueService {
         return coinValueRepository.findTop25ByOrderByRequestDateDesc();
     }
 
+    public List<CoinValue> findAllByCoin(Coin coin) {
+        return coinValueRepository.findByCoinOrderByRequestDateDesc(coin);
+    }
+
 
     private GetCoinValueCommand createCoinValueCommand(Coin coin) {
         // create command
