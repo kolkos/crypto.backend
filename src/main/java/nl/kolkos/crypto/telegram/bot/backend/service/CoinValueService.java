@@ -13,6 +13,7 @@ import nl.kolkos.crypto.telegram.bot.backend.repository.CoinValueRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,13 +25,17 @@ public class CoinValueService {
 
 
     public CoinValue getCoinValueForCoin(Coin coin) {
+        log.info("Requesting coin value for coin: {}", coin);
+
         GetCoinValueCommand getCoinValueCommand = createCoinValueCommand(coin);
 
         String response = runCommand(getCoinValueCommand);
 
         CoinValueResult coinValueResult = createCoinValueResultFromString(response);
 
-        CoinValue coinValueFromResponse = createCoinValueFromResponse(coinValueResult);
+        CoinValue coinValueFromResponse = createCoinValueFromResponse(coinValueResult, coin);
+        log.info("CoinValue: {}", coinValueFromResponse);
+
         return save(coinValueFromResponse);
     }
 
@@ -38,13 +43,18 @@ public class CoinValueService {
         return coinValueRepository.save(coinValue);
     }
 
+    public List<CoinValue> listCoinValues() {
+        return coinValueRepository.findTop25ByOrderByRequestDateDesc();
+    }
+
+
     private GetCoinValueCommand createCoinValueCommand(Coin coin) {
         // create command
         return new GetCoinValueCommand(coin, applicationSettings);
     }
 
     private CoinValueResult createCoinValueResultFromString(String response) {
-        log.info("Transforming response:\n{}", response);
+        log.info("Parsing CoinValue response:\n\t{}", response);
 
         Gson gson = new Gson();
         return gson.fromJson(response, CoinValueResult.class);
@@ -56,12 +66,13 @@ public class CoinValueService {
         return commandRunner.run();
     }
 
-    private CoinValue createCoinValueFromResponse(CoinValueResult coinValueResult) {
+    private CoinValue createCoinValueFromResponse(CoinValueResult coinValueResult, Coin coin) {
         return CoinValue.builder()
                 .requestDate(new Date())
                 .high(coinValueResult.getHigh())
                 .low(coinValueResult.getLow())
                 .last(coinValueResult.getLast())
+                .coin(coin)
                 .build();
     }
 

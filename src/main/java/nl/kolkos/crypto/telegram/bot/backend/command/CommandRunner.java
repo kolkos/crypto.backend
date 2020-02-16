@@ -20,12 +20,7 @@ public class CommandRunner {
 
     public String run() {
         String url = command.execute();
-        String response = restClient.callUrl(url);
-
-        log.info("Calling url: {}", url);
-        log.info("Response from Domoticz:\n{}", response);
-
-        return response;
+        return restClient.callUrl(url);
     }
 
 }

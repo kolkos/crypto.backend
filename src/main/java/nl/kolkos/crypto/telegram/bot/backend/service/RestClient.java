@@ -19,18 +19,21 @@ public class RestClient {
     private final RestTemplate restTemplate;
 
     public String callUrl(String url) {
+        log.info("Calling url: {}", url);
+
         HttpHeaders headers = createHeaders();
         HttpEntity<String> request = new HttpEntity<>(headers);
 
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, request, String.class);
-        return response.getBody();
+        log.info("Received response:\n\t{}", response);
 
+        return response.getBody();
     }
 
     private HttpHeaders createHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        log.info(headers);
+        log.debug(headers);
         return headers;
     }
 
