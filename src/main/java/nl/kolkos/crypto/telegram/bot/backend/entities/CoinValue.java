@@ -25,7 +25,7 @@ public class CoinValue {
     private Long id;
 
     private Date requestDate;
-    
+
     private double last;
     private double high;
     private double low;
