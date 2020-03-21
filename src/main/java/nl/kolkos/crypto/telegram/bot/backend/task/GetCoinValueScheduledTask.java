@@ -15,7 +15,7 @@ public class GetCoinValueScheduledTask {
     private final CoinService coinService;
     private final CoinValueService coinValueService;
 
-    @Scheduled(cron = "0 */2 * * * *")
+    @Scheduled(cron = "0 */5 * * * *")
     public void getCoinValues() {
         log.info("getting coin value");
         coinService.listAll()

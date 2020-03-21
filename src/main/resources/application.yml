@@ -20,6 +20,7 @@ spring:
         format_sql: true
 app:
   currency: eur
+  header-field-token: TOKEN
 apis:
   wallet-value-api: https://api.blockcypher.com/v1/{{coin.symbol}}/main/addrs/{{wallet.address}}/balance
   coin-value-api: https://www.bitstamp.net/api/v2/ticker/{{coin.symbol}}{{app.currency}}/
