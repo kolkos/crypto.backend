@@ -20,24 +20,20 @@ public class HeaderInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response, Object object) throws Exception {
-        log.info("preHandle!");
-
+                             HttpServletResponse response, Object object) {
         if (!checkToken(request)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "TOKEN not found in the header");
         }
 
         String token = request.getHeaders(applicationSettings.getTokenFieldInHeader()).nextElement();
         portfolioToken.setToken(token);
-
-        log.info("request {}", token);
-        log.info("response: {}", response);
+        log.info("Received token '{}'", token);
 
         return true;
     }
 
     private boolean checkToken(HttpServletRequest request) {
-        return request.getHeaders("token").hasMoreElements();
+        return request.getHeaders(applicationSettings.getTokenFieldInHeader()).hasMoreElements();
     }
 
 

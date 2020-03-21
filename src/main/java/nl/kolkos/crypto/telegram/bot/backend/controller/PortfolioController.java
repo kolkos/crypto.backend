@@ -18,4 +18,9 @@ public class PortfolioController {
         return portfolioService.requestNewPortfolio(name);
     }
 
+    @GetMapping("/check")
+    public void checkPortfolio() {
+        portfolioService.getPortfolioWithToken();
+    }
+
 }
