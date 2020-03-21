@@ -1,7 +1,7 @@
 spring:
   datasource:
     initialization-mode: always
-    url: jdbc:mysql://localhost:30306/test
+    url: jdbc:mysql://localhost:30036/test
     username: test
     password: test
     driver-class-name: com.mysql.cj.jdbc.Driver
