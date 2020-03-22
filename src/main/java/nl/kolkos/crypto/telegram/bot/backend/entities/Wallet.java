@@ -1,21 +1,9 @@
 package nl.kolkos.crypto.telegram.bot.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
 @Entity
 @Builder(toBuilder = true)
@@ -39,8 +27,11 @@ public class Wallet {
     @JsonBackReference
     private Portfolio portfolio;
 
-    @NotNull
+    @NonNull
     private String address;
+
+    @NonNull
+    private String name;
 
     private String description;
 

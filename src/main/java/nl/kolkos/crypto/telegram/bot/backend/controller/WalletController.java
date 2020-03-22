@@ -22,8 +22,11 @@ public class WalletController {
     }
 
     @GetMapping("/register")
-    public Wallet registerNewWallet(@RequestParam String coinSymbol, @RequestParam String address, @RequestParam String description) {
-        return walletService.registerNewWallet(coinSymbol, address, description);
+    public Wallet registerNewWallet(@RequestParam String coinSymbol,
+                                    @RequestParam String address,
+                                    @RequestParam String name,
+                                    @RequestParam String description) {
+        return walletService.registerNewWallet(coinSymbol, address, name, description);
     }
 
 }
