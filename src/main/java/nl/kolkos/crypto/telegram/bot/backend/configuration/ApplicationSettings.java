@@ -16,7 +16,4 @@ public class ApplicationSettings {
 
     @Value("${app.currency}")
     private String currency;
-
-    @Value("${app.header-field-token}")
-    private String tokenFieldInHeader;
 }

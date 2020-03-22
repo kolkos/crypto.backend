@@ -11,11 +11,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
     private final PortfolioToken portfolioToken;
-    private final ApplicationSettings applicationSettings;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new HeaderInterceptor(portfolioToken, applicationSettings)).addPathPatterns("/portfolios/check*");
+        registry.addInterceptor(new HeaderInterceptor(portfolioToken)).addPathPatterns("/portfolios/check*", "/wallets/*");
     }
 
 }
