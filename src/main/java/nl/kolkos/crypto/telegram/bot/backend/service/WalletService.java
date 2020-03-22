@@ -15,12 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WalletService {
     private final WalletRepository walletRepository;
-    private final PortfolioService portfolioService;
+    private final InterceptedPortfolioService interceptedPortfolioService;
     private final CoinService coinService;
 
     public Wallet registerNewWallet(String coinSymbol, String address, String name, String description) {
         Coin coin = coinService.findBySymbol(coinSymbol);
-        Portfolio portfolio = portfolioService.getPortfolioWithToken();
+        Portfolio portfolio = interceptedPortfolioService.getPortfolio();
 
         Wallet wallet = Wallet.builder()
                 .address(address)
@@ -34,20 +34,18 @@ public class WalletService {
     }
 
 
-
-
     public List<Wallet> getMyWallets() {
-        Portfolio portfolio = portfolioService.getPortfolioWithToken();
+        Portfolio portfolio = interceptedPortfolioService.getPortfolio();
         return this.findWalletsByPortfolio(portfolio);
     }
 
     public Wallet findByAddress(String address) {
-        Portfolio portfolio = portfolioService.getPortfolioWithToken();
+        Portfolio portfolio = interceptedPortfolioService.getPortfolio();
         return this.findWalletByPortfolioAndAddress(portfolio, address);
     }
 
     public Wallet findByName(String name) {
-        Portfolio portfolio = portfolioService.getPortfolioWithToken();
+        Portfolio portfolio = interceptedPortfolioService.getPortfolio();
         return this.findWalletByPortfolioAndName(portfolio, name);
     }
 

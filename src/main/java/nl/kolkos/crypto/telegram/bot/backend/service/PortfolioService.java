@@ -2,7 +2,6 @@ package nl.kolkos.crypto.telegram.bot.backend.service;
 
 import lombok.RequiredArgsConstructor;
 import nl.kolkos.crypto.telegram.bot.backend.entities.Portfolio;
-import nl.kolkos.crypto.telegram.bot.backend.model.PortfolioToken;
 import nl.kolkos.crypto.telegram.bot.backend.repository.PortfolioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PortfolioService {
     private final PortfolioRepository portfolioRepository;
-    private final PortfolioToken portfolioToken;
 
     public Portfolio requestNewPortfolio(String name) {
         String token = UUID.randomUUID().toString();
@@ -27,10 +25,10 @@ public class PortfolioService {
         return portfolioRepository.save(portfolio);
     }
 
-    public Portfolio getPortfolioWithToken() {
-        return portfolioRepository.findByToken(portfolioToken.getToken())
+    public Portfolio getPortfolioWithToken(String token) {
+        return portfolioRepository.findByToken(token)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                        String.format("Cannot find portfolio with token '%s'", portfolioToken.getToken())));
+                        String.format("Cannot find portfolio with token '%s'", token)));
     }
 
 
