@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Builder(toBuilder = true)
@@ -20,7 +20,7 @@ public class Transaction {
     private Long id;
 
     @NonNull
-    private Date transactionDate;
+    private LocalDateTime transactionDate;
 
     @NonNull
     @Enumerated(EnumType.ORDINAL)

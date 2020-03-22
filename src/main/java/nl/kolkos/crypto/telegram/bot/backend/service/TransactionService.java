@@ -8,7 +8,7 @@ import nl.kolkos.crypto.telegram.bot.backend.entities.Wallet;
 import nl.kolkos.crypto.telegram.bot.backend.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -18,7 +18,7 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final WalletService walletService;
 
-    public Transaction registerTransaction(TransactionType transactionType, Date transactionDate, String walletAddress, double amount, double valueOnTransactionDate) {
+    public Transaction registerTransaction(TransactionType transactionType, LocalDateTime transactionDate, String walletAddress, double amount, double valueOnTransactionDate) {
         Wallet wallet = walletService.findByAddress(walletAddress);
         Transaction transaction = Transaction.builder()
                 .transactionType(transactionType)
@@ -34,6 +34,11 @@ public class TransactionService {
     public List<Transaction> findByWallet(String walletAddress) {
         Wallet wallet = walletService.findByAddress(walletAddress);
         return transactionRepository.findByWalletOrderByTransactionDateDesc(wallet);
+    }
+
+    public double getTotalAmountDepositedIn(String walletAddress) {
+        Wallet wallet = walletService.findByAddress(walletAddress);
+        return transactionRepository.getTotalDepositsForWallet(TransactionType.DEPOSIT, wallet.getId());
     }
 
 

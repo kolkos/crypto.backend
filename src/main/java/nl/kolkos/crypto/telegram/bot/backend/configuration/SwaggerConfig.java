@@ -10,7 +10,8 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.util.Collections;
 
 import static nl.kolkos.crypto.telegram.bot.backend.constant.Constants.TOKEN_HEADER_FIELD_NAME;
 
@@ -22,13 +23,14 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .globalOperationParameters(
-                        Arrays.asList(new ParameterBuilder()
+                        Collections.singletonList(new ParameterBuilder()
                                 .name(TOKEN_HEADER_FIELD_NAME)
                                 .description("Portfolio token")
                                 .modelRef(new ModelRef("string"))
                                 .parameterType("header")
                                 .required(false)
                                 .build()))
+                .directModelSubstitute(LocalDateTime.class, java.util.Date.class)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
