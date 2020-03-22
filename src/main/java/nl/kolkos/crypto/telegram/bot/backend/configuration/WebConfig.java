@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new HeaderInterceptor(portfolioToken)).addPathPatterns("/portfolios/check*", "/wallets/*");
+        registry.addInterceptor(new HeaderInterceptor(portfolioToken)).addPathPatterns("/portfolios/check*", "/wallets/*", "/transactions");
     }
 
 }
