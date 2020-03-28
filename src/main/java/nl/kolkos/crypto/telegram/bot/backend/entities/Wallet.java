@@ -1,9 +1,11 @@
 package nl.kolkos.crypto.telegram.bot.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Builder(toBuilder = true)
@@ -34,6 +36,10 @@ public class Wallet {
     private String name;
 
     private String description;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "wallet")
+    private Set<Transaction> transactions;
 
 
 }

@@ -28,6 +28,8 @@ public class TransactionService {
                 .valueOnTransactionDate(valueOnTransactionDate)
                 .build();
 
+//        log.info("Transaction: {}", transaction.toString());
+
         return this.save(transaction);
     }
 

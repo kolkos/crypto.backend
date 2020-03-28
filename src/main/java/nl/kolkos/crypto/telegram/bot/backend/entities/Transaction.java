@@ -2,6 +2,7 @@ package nl.kolkos.crypto.telegram.bot.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class Transaction {
     private Long id;
 
     @NonNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime transactionDate;
 
     @NonNull
