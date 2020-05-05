@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +23,13 @@ public class CoinValueService {
     private final CommandRunner commandRunner;
     private final CoinValueRepository coinValueRepository;
     private final ApplicationSettings applicationSettings;
+    private final CoinService coinService;
 
+    public List<CoinValue> getLatestCoinValuesForAllCoins() {
+        return coinService.listAll().stream()
+                .map(this::getCoinValueForCoin)
+                .collect(Collectors.toList());
+    }
 
     public CoinValue getCoinValueForCoin(Coin coin) {
         log.info("Requesting coin value for coin: {}", coin);

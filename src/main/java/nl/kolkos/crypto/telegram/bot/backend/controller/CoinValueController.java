@@ -60,5 +60,10 @@ public class CoinValueController {
         return coinValueService.save(coinValue);
     }
 
+    @GetMapping("/update")
+    public List<CoinValue> getLatestValues() {
+        return coinValueService.getLatestCoinValuesForAllCoins();
+    }
+
 
 }
